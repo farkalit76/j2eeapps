@@ -1,0 +1,111 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    
+
+    <!-- It will scan all controller,service and dao folders -->
+    <context:component-scan base-package="com.usman.study" /> 
+ 
+<!--    <context:component-scan base-package="com.usman.study.controller" /> It will only scan controller folder -->
+ 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsps/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    
+    <!-- Intercepter Handeler Configuration ... -->
+    <bean id="customRequestHandler" class="com.usman.study.handler.CustomRequestHandler" />
+ 
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+     
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+<!--                <ref bean="customRequestHandler" />-->
+                 <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>  
+    <!-- Intercepter Handeler Configuration End.-->
+    
+    
+    <!-- Properties Handeler With Localization ... -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
+     
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+  
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="lang" />
+    </bean>
+     
+    <!--   THIS PART TO SET the LOCALE into INTERCEPTOR is done in above section.  
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="localeChangeInterceptor" />
+            </list>
+        </property>
+    </bean>-->
+    <!-- Properties Handeler With Localization End... -->
+    
+    
+    <!-- AOP Configuration Example... -->
+    <!-- We don't need to this; This is required only in annotation based AOP support -->
+    <!-- <aop:aspectj-autoproxy /> -->
+ 
+    <aop:config>
+     
+        <!-- Spring AOP Pointcut definitions -->
+        <aop:pointcut id="loggingOperation"
+            expression="execution(* com.usman.study.aop.EmployeeManager.*(..))" />
+             
+        <aop:pointcut id="transactionOperation"
+            expression="execution(* com.usman.study.aop.EmployeeManager.getEmployeeById(..))" />
+ 
+        <!-- Spring AOP aspect 1 -->
+        <aop:aspect id="loggingAspect" ref="loggingAspectBean">
+             
+            <!-- Spring AOP advises -->
+            <aop:before pointcut-ref="loggingOperation" method="logBefore" />
+            <aop:after pointcut-ref="loggingOperation" method="logAfter" />
+             
+        </aop:aspect>
+ 
+        <!-- Spring AOP aspect 2 -->
+        <aop:aspect id="transactionAspect" ref="transactionAspectBean">
+            <aop:before pointcut-ref="transactionOperation" method="getEmployeeById" />
+        </aop:aspect>
+ 
+    </aop:config>
+ 
+    <!-- Spring AOP aspect instances -->
+    <bean id="loggingAspectBean" class="com.usman.study.aop.EmployeeCRUDLoggingAspect" />
+    <bean id="transactionAspectBean" class="com.usman.study.aop.EmployeeCRUDTransactionAspect" />
+     
+    <!-- Target Object -->
+    <bean id="employeeManager" class="com.usman.study.aop.EmployeeManagerImpl" />
+    
+    <!-- AOP Configuration Example End.-->
+    
+    <!--   File upload multipart resolver -->
+    <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+        <!-- max upload size in bytes -->
+        <property name="maxUploadSize" value="20971520" /> <!-- 20MB -->        
+        <!-- max size of file in memory (in bytes) -->
+        <property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </bean>
+    
+</beans>
