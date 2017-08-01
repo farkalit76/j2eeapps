@@ -1,0 +1,131 @@
+<beans xmlns = "http://www.springframework.org/schema/beans"
+           xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation = "http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id = "helloWorld" class = "com.farkalit.tutorial.spring.HelloWorld">
+        <property name = "message" value = "Hello World!"/>
+    </bean>
+    
+    <bean id = "helloWorldS" class = "com.farkalit.tutorial.spring.HelloWorld" scope="singleton"/>
+    <bean id = "helloWorldP" class = "com.farkalit.tutorial.spring.HelloWorld" scope="prototype"/>
+    <bean id = "helloWorldI" class = "com.farkalit.tutorial.spring.HelloWorld" init-method="init" destroy-method="destroy"/>
+    
+    <!-- Inheritance and Template -->
+    <bean id = "beanTeamplate" abstract = "true">
+        <property name = "message1" value = "Hello World!"/>
+        <property name = "message2" value = "Hello Second World!"/>
+        <property name = "message3" value = "Namaste India!"/>
+    </bean>
+   
+    <bean id = "hello" class = "com.farkalit.tutorial.spring.HelloWorld">
+        <property name = "message1" value = "Hello World!"/>
+        <property name = "message2" value = "Hello Second World!"/>
+    </bean>
+
+    <bean id =" helloIndia" class = "com.farkalit.tutorial.spring.HelloIndia" parent = "hello">
+        <property name = "message1" value = "Hello India!"/>
+        <property name = "message3" value = "Namaste India!"/>
+    </bean>
+   
+    <bean id =" helloIndiaT" class = "com.farkalit.tutorial.spring.HelloIndia" parent = "beanTeamplate">
+        <property name = "message1" value = "Hello India!"/>
+        <property name = "message3" value = "Namaste India!"/>
+    </bean>
+    
+    <!-- DI example of setter based (Dependent object could be either Primitive and and Object) -->
+    <bean id="empSetter" class="com.farkalit.tutorial.spring.EmployeeDISetter">  
+        <property name="id" value="22"/>  
+        <property name="name" value="Farkalit"/>  
+        <property name="city" value="Jamia Nagar"/>  
+    </bean>
+        
+    <!-- DI example of constructor  based (Dependent object could be either Primitive and and Object) -->
+    <bean id="employee" class="com.farkalit.tutorial.spring.EmployeeDI">  
+        <constructor-arg value="10" type="int" ></constructor-arg>  
+        <constructor-arg value="Farkalit Usman"></constructor-arg>  
+    </bean>  
+    
+    <bean id="address" class="com.farkalit.tutorial.spring.Address">  
+        <constructor-arg value="Shaheen Bagh"></constructor-arg>  
+        <constructor-arg value="Delhi"></constructor-arg>  
+        <constructor-arg value="India"></constructor-arg>  
+    </bean>  
+    
+    <bean id="employObj" class="com.farkalit.tutorial.spring.EmployeeDI">  
+        <constructor-arg value="12" type="int"/>
+        <constructor-arg value="Usman"/>
+        <constructor-arg ref="address"/>  
+    </bean>
+    
+    <!-- Definition DI of Collections like list, map, set, properties -->
+    <bean id = "diCollection" class = "com.farkalit.tutorial.spring.DICollection">
+      
+        <!-- results in a setAddressList(java.util.List) call -->
+        <property name = "addressList">
+            <list>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>KSA</value>
+                <value>USA</value>
+            </list>
+        </property>
+
+        <!-- results in a setAddressSet(java.util.Set) call -->
+        <property name = "addressSet">
+            <set>
+                <value>INDIA</value>
+                <value>Pakistan</value>
+                <value>KSA</value>
+                <value>USA</value>
+            </set>
+        </property>
+
+        <!-- results in a setAddressMap(java.util.Map) call -->
+        <property name = "addressMap">
+            <map>
+                <entry key = "1" value = "INDIA"/>
+                <entry key = "2" value = "Pakistan"/>
+                <entry key = "3" value = "KSA"/>
+                <entry key = "4" value = "USA"/>
+            </map>
+        </property>
+      
+        <!-- results in a setAddressProp(java.util.Properties) call -->
+        <property name = "addressProp">
+            <props>
+                <prop key = "one">INDIA</prop>
+                <prop key = "two">Pakistan</prop>
+                <prop key = "three">KSA</prop>
+                <prop key = "four">USA</prop>
+            </props>
+        </property>
+
+        <!-- results in a setAddList(java.util.List<Address>() call -->
+        <property name = "addList">
+            <list>
+                <ref bean="add1"/>
+                <ref bean="add2"/>
+                <ref bean="add3"/>
+            </list>
+        </property>
+    </bean>
+            
+    <bean id="add1" class="com.farkalit.tutorial.spring.Address">  
+        <constructor-arg value="Shaheen Bagh"></constructor-arg>  
+        <constructor-arg value="New Delhi"></constructor-arg>  
+        <constructor-arg value="India"></constructor-arg>  
+    </bean>  
+    <bean id="add2" class="com.farkalit.tutorial.spring.Address">  
+        <constructor-arg value="Mahaveer Enclave, Dwarka"></constructor-arg>  
+        <constructor-arg value="New Delhi"></constructor-arg>  
+        <constructor-arg value="India"></constructor-arg>  
+    </bean>  
+    <bean id="add3" class="com.farkalit.tutorial.spring.Address">  
+        <constructor-arg value="Paschim Vihar, Sector 22"></constructor-arg>  
+        <constructor-arg value="New Delhi"></constructor-arg>  
+        <constructor-arg value="India"></constructor-arg>  
+    </bean>  
+  
+        
+</beans>

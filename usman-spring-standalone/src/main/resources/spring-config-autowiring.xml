@@ -1,0 +1,22 @@
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  ">
+        
+    
+    <!-- Auto wiring Dependency Injection -->
+    <bean
+        class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+    <bean id="customerBean" class="com.farkalit.tutorial.spring.autowire.Customer">
+        <property name="action" value="buy" />
+        <property name="type" value="1" />
+    </bean>
+
+    <bean id="personBean" class="com.farkalit.tutorial.spring.autowire.Person">
+        <property name="name" value="Farkalit Usman" />
+        <property name="address" value="D-80 Jamia Nagar" />
+        <property name="age" value="29" />
+    </bean>
+
+</beans>
