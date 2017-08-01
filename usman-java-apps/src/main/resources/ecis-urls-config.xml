@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecisUrls>
+    <ecisPlus type="A" value="http://host:port/account/"  />
+    <ecisPlus type="C" value="http://host:port/customer/" />
+    <ecisPlus type="E" value="http://host:port/phone/"    />       
+</ecisUrls>

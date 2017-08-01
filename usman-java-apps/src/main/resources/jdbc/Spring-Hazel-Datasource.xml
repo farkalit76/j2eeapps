@@ -1,0 +1,70 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:hz="http://www.hazelcast.com/schema/spring"
+ xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.hazelcast.com/schema/spring
+          http://www.hazelcast.com/schema/spring/hazelcast-spring-3.4.xsd">
+    
+
+    <context:property-placeholder location="classpath:hazel-server.properties" />
+
+    <hz:hazelcast id="instance">
+        <hz:config>
+            <hz:group name="${hazel.username}" password="${hazel.password}" />
+            <hz:properties>
+                <hz:property name="hazelcast.merge.first.run.delay.seconds">5</hz:property>
+                <hz:property name="hazelcast.merge.next.run.delay.seconds">5</hz:property>
+                <hz:property name="hazelcast.logging.type">log4j</hz:property>
+                <!-- reference : http://hazelcast.org/docs/latest/manual/html/logging.html -->
+            </hz:properties>
+
+
+            <hz:network port="${hazel.network.port}"
+               port-auto-increment="${hazel.port.autoincrement}">
+                <hz:join>
+                    <hz:multicast enabled="false" />
+                    <hz:tcp-ip connection-timeout-seconds="5"  enabled="${hazel.tcp.enabled}">
+                        <hz:member>${hazel.tcp.member}</hz:member>
+                    </hz:tcp-ip>
+                </hz:join>
+            </hz:network>
+
+
+            <hz:map name="store" backup-count="1" in-memory-format="BINARY"  statistics-enabled="true">
+                <hz:map-store enabled="true" implementation="mysqlMapStore"
+                  write-delay-seconds="${hazel.mapstore.delay}">
+                </hz:map-store>
+            </hz:map>
+
+        </hz:config>
+    </hz:hazelcast>
+
+
+    <hz:map instance-ref="instance" id="store" name="store" />
+
+
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/test" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>-->
+
+    <bean name="dataSource"  class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db.driverClassName}" />
+        <property name="url" value="${db.url}" />
+        <property name="username" value="${db.username}" />
+        <property name="password" value="${db.password}" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="mysqlMapStore" class="com.farkalit.store.MySQLMapStore">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+</beans>
