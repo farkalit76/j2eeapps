@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.usman.medical.data.Orders" table="orders">
+    <!-- Primary key --> 
+    <id name="moduleId" column="order_id" />
+    
+    <property name="prodId"      column="prod_id" />
+    <property name="prodName"    column="prodName" />
+    <property name="quantity"    column="quantity"/>
+    <property name="amount"      column="amount"/>
+    <property name="custId"      column="cust_id"  />
+    <property name="custName"    column="custName" />
+    <property name="description" column="description" />
+    <property name="dispatched"  column="dispatched" />
+    <property name="createdBy"/>
+    <property name="createdDate" type="calendar"/>
+  </class>
+</hibernate-mapping>

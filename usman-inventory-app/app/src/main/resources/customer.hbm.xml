@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.usman.medical.data.Customer" table="customer" >
+
+    <id name="moduleId" column="cust_id" />
+    
+    <property name="name"/>
+    <property name="degree"/>
+    <property name="profession"/>
+    <property name="experience"/>
+    <property name="address"/>
+    <property column="dateofbirth" name="dateOfBirth" />
+    <property name="sex"  column="sex" type="character"/>
+    <property name="description"/>
+    <property name="createdBy"/>
+    <property name="createdDate" type="calendar"/>
+  </class>
+</hibernate-mapping>
