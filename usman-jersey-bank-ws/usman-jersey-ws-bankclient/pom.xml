@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.farkalit.tutorial.jersey</groupId>
+        <artifactId>usman-jersey-ws</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>usman-jersey-ws-bankclient</artifactId>
+    <packaging>jar</packaging>
+    
+    <dependencies>
+    
+        <!-- Add the Jersey jars -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${version.jersey}</version>
+        </dependency>
+       
+    </dependencies>
+    
+    <name>Usman Jersey REST WS for Bank Client</name>
+    <description>Usman Jersey REST WS for Bank Client</description>
+</project>

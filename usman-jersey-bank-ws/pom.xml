@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.farkalit.tutorial.jersey</groupId>
+    <artifactId>usman-jersey-bank-ws</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+        <version.jersey>1.19</version.jersey>
+        <version.org.springframework>4.1.7.RELEASE</version.org.springframework>
+        <version.org.slf4j>1.7.7</version.org.slf4j>
+        <version.org.testng>6.8.13</version.org.testng>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <modules>
+        <module>usman-jersey-ws-api</module>
+        <module>usman-jersey-ws-bank</module>
+        <module>usman-jersey-ws-bankclient</module>
+    </modules>
+  
+    <name>Usman Jersey REST WS Parent POM</name>
+    <description>Usman Jersey REST WS Parent POM</description>
+</project>
