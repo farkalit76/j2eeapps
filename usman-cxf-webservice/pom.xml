@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.farkalit.tutorial.webservice</groupId>
+    <artifactId>usman-cxf-webservice-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.vertexgroup.telephony</groupId>
+        <artifactId>vts-parent</artifactId>
+        <version>2.3</version>
+    </parent>
+    
+    <properties>
+        <cxf.version>3.1.1</cxf.version>
+        <version.org.springframework>4.1.7.RELEASE</version.org.springframework>
+        <version.org.slf4j>1.7.7</version.org.slf4j>
+        <version.org.testng>6.8.13</version.org.testng>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <name>Usman CXF Web Service Parent POM</name>
+    <modules>
+        <module>usman-ws-api</module>
+        <module>usman-ws-bank</module>
+        <module>bankclient</module>
+        <module>usman-ws-bookshelf</module>
+        <module>usman-ws-bookshelfclient</module>
+        <module>usman-ws-birthday</module>
+        <module>usman-ws-birthdayclient</module>
+        <module>usman-ws-helloworldclient</module>
+        <module>usman-ws-helloworld</module>
+    </modules>
+</project>
