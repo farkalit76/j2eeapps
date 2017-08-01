@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+            http://www.springframework.org/schema/task 
+            http://www.springframework.org/schema/task/spring-task-4.2.xsd">
+    
+
+    <!-- It will scan all controller,service and dao folders -->
+    <context:component-scan base-package="com.farkalit.telephony.cron" /> 
+ 
+ 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsps/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <bean id="emailJob" class="com.farkalit.telephony.cron.EmailScheduledTasks" />
+
+    <!-- Run every 5 seconds -->
+    <task:scheduled-tasks>
+        <task:scheduled ref="emailJob" method="checkMail" cron="*/5 * * * * *" />
+    </task:scheduled-tasks>
+
+    
+</beans>
