@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.usman.springhib.model.User" table="user">
+        
+        <id name="userId" column="USER_ID" />
+        <property name="userName" column="USERNAME" />
+        <property name="createdBy" column="created_by" />
+        <property name="createdDate" column="created_date" type="calendar" />
+    </class>
+</hibernate-mapping>

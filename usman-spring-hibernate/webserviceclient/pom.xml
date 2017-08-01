@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.usman.springhib</groupId>
+        <artifactId>SpringHibernatePOM</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>webserviceclient</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <org.apache.cxf.version>3.1.1</org.apache.cxf.version>
+    </properties>
+    
+    <dependencies>
+        
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.6</version>
+            <scope>test</scope>
+        </dependency>
+            
+    </dependencies>
+    
+    <!-- Build Settings for Web Service Client -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-codegen-plugin</artifactId>
+                    <version>${org.apache.cxf.version}</version>
+                    <configuration>
+                        <wsdlOptions>
+                            <wsdlOption>
+                                <bindingFiles>
+                                    <bindingFile>${basedir}/src/main/wsdl/bindings.xml</bindingFile>
+                                </bindingFiles>
+                                <wsdl>${project.build.outputDirectory}/webservicetest.wsdl</wsdl>
+                                <wsdlLocation>classpath:webservicetest.wsdl</wsdlLocation>
+                            </wsdlOption>
+                        </wsdlOptions>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <configuration>
+                        <excludeRoots>
+                            <excludeRoot>${project.build.directory}/generated-sources/cxf</excludeRoot>
+                        </excludeRoots>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-wsdl</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.usman.springhib</groupId>
+                                    <artifactId>webservicetest</artifactId>
+                                    <version>1.1-SNAPSHOT</version>
+                                    <type>wsdl</type>
+                                    <destFileName>webservicetest.wsdl</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+        </plugins>
+    </build>
+
+    
+    <!-- More Project Information -->
+    <name>Usman Spring-WebService client</name>
+    <description>A web service client for the Entity API.</description>
+</project>
