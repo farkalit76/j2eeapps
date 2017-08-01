@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.farkalit.library.test.BookCatalog" table="book_catalog">
+  
+        <id name="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="name"/>
+        <property name="author"/>
+        <property name="price"/>
+        <property name="printingYear" column="printing_year"/>
+        <property name="pages"/>
+        <property name="available"/>   
+    </class>
+</hibernate-mapping>

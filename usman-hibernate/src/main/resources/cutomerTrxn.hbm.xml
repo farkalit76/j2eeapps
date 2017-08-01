@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.farkalit.mapping.model.CustomerTrxn" table="transaction">
+    <id column="txn_id" name="id" type="long">
+      <generator class="identity"/>
+      <!-- auto generator -->
+    </id>
+    <property column="txn_date" name="date" type="date"/>
+    <property column="txn_total" name="total" type="double"/>
+    <one-to-one cascade="save-update" class="com.farkalit.mapping.model.Customer" name="customer"/>
+  </class>
+</hibernate-mapping>

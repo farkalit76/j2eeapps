@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class lazy="false" name="com.farkalit.library.test.LibraryInfo" table="lib_info">
+    <id name="id">
+      <generator class="assigned"/>
+    </id>
+    <property name="name"/>
+    <property name="address"/>
+    <property name="established"/>
+    <property name="founder"/>
+  </class>
+</hibernate-mapping>

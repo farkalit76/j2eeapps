@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.farkalit.mapping.model.Voters" table="voters">
+        <meta attribute="class-description">This class contains voters details.</meta>
+        <id name="votId" type="long" column="VOT_ID">
+            <generator class="native" />
+        </id>
+        <property name="votName" type="string" length="45" not-null="true" column="VOT_NAME" />
+        <many-to-one name="voterAddress" class="com.farkalit.mapping.model.VoterAddress" column="VOT_ADDRESS" cascade="all" not-null="true" />
+    </class>
+</hibernate-mapping>
+    

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.farkalit.mapping.model.Customer" table="customer">
+    <id column="txn_id" name="id" type="long">
+      <generator class="foreign">
+        <param name="property">trxn</param>
+      </generator>
+    </id>
+    <property column="cust_name" name="name" type="string"/>
+    <property column="cust_email" name="email" type="string"/>
+    <property column="cust_address" name="address" type="string"/>
+    <one-to-one class="com.farkalit.mapping.model.CustomerTrxn" constrained="true" name="trxn"/>
+  </class>
+</hibernate-mapping>

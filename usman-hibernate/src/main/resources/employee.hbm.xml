@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+  
+<hibernate-mapping>
+    
+    <class name="com.farkalit.emp.test.Employee" table="employee" lazy="false">
+        
+        <id name="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
+        <property name="age" type="integer"/>
+        <property name="sex" type="character"/>
+        <property name="education" type="string"/>
+        <property name="salary" type="double"/>
+        <property name="joiningDate" type="date"/>
+    </class>
+    
+</hibernate-mapping>

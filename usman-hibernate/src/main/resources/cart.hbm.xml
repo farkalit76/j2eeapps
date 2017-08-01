@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.farkalit.mapping.model.Cart" table="cart">
+    <id column="cart_id" name="id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property column="total" name="total" type="double"/>
+    <property column="name" name="name" type="string"/>
+    <set fetch="select" name="items" table="ITEMS">
+      <key>
+        <column name="cart_id" not-null="true"/>
+      </key>
+      <one-to-many class="com.farkalit.mapping.model.CartItems"/>
+    </set>
+  </class>
+</hibernate-mapping>
