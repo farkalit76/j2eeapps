@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.usman.medical</groupId>
+        <artifactId>fu-medical</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>jersey-client</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <version.jersey>1.19</version.jersey>
+        <version.org.springframework>4.1.7.RELEASE</version.org.springframework>
+        <version.org.slf4j>1.7.7</version.org.slf4j>
+        <version.org.testng>6.8.13</version.org.testng>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    
+     <dependencies>
+    
+         <dependency>
+             <groupId>com.usman.medical</groupId>
+             <artifactId>fu-medical-app</artifactId>
+             <version>1.1-SNAPSHOT</version>
+         </dependency>
+        <!-- Add the Jersey jars -->
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${version.jersey}</version>
+        </dependency>
+       
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+    </dependencies>
+    
+    <name>Usman Jersey Hibernate Client</name>
+</project>

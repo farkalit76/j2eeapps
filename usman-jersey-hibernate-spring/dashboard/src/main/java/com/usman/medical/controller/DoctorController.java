@@ -7,6 +7,7 @@ package com.usman.medical.controller;
 
 import com.usman.medical.data.AdminResponse;
 import com.usman.medical.data.Doctor;
+import com.usman.medical.jersey.client.DoctorJerseyClient;
 import com.usman.medical.service.DoctorService;
 import com.usman.medical.util.CommonUtils;
 import com.usman.medical.util.DateUtils;
@@ -44,7 +45,9 @@ public class DoctorController
         LOG.info("Doctor display ");
         ModelAndView model = new ModelAndView("doctor_list");
         //DoctorDao dao = new DoctorDao();
-        List<Doctor> doctors = doctorService.listDoctor();
+        //List<Doctor> doctors = doctorService.listDoctor();
+        List<Doctor> doctors = DoctorJerseyClient.getGenericType();
+        System.out.println("doctors:"+doctors.size());
         model.addObject("doctors", doctors);
       
         return model;

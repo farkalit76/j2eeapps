@@ -16,5 +16,6 @@
     <module>dashboard</module>
     <module>app</module>
     <module>jersey-web</module>
+    <module>jersey-client</module>
   </modules>
 </project>

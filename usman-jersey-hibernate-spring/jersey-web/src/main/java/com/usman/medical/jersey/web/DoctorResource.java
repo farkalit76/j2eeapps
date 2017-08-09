@@ -38,7 +38,7 @@ public class DoctorResource {
     @Path("list")
     @Produces(
             {
-                MediaType.APPLICATION_XML
+                MediaType.TEXT_XML,MediaType.APPLICATION_XML
             })
     //@Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     //@Consumes({MediaType.APPLICATION_JSON })
