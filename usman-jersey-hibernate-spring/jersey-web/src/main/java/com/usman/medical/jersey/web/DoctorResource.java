@@ -12,8 +12,11 @@ import com.usman.medical.util.DateUtils;
 import com.usman.medical.util.IDGenerator;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,44 +58,73 @@ public class DoctorResource {
     @Path("find/{doctorId}")
     @Produces(
             {
-                MediaType.APPLICATION_JSON
+                MediaType.TEXT_XML,MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON
             })
     public Doctor findDoctorById(@PathParam("doctorId") long doctorId)
     {
         Doctor doctor = doctorService.findDoctorById(doctorId);
-        System.out.println(doctor.toString());
+        System.out.println("doctor:"+doctor.toString());
         return doctor;
     }
 
     @POST
-    @Path("/create/{name}")
-    //@Consumes({MediaType.APPLICATION_JSON })
-    //@Produces({MediaType.APPLICATION_JSON })
+    @Path("create")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(
     {
         MediaType.TEXT_XML, MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON
     })
-    //public String createDoctor(@FormParam("doctor") Doctor doctor)
-    public String createDoctor(@PathParam("name")String name)
+    public String createDoctor( @FormParam("name")String name,
+            @FormParam("degree")String degree, @FormParam("description")String description,
+            @FormParam("profession")String profession, @FormParam("address")String address,
+            @FormParam("experience")String experience, @FormParam("dateofbirth")String dateofbirth,@FormParam("sex")String sex)
     {
-        System.out.println("Doctor create.....");
+        System.out.println("Doctor create.....sex:"+sex);
         Doctor doctor = new Doctor();
-        System.out.println("Doctor:" + doctor.toString());
-        doctor.setDateOfBirth(DateUtils.getDate(doctor.getDob(), DATE_FORMAT));
+        //set all the values
         doctor.setModuleId(IDGenerator.getRandomNum());
-        doctor.setName("Usman");
-        doctor.setProfession("Doctor");
-        doctor.setAddress("Delhi");
-        doctor.setExperience(44.0);
-        doctor.setDescription("Nothing");
-        doctor.setDegree("MBBS");
+        doctor.setName(name);
+        doctor.setDegree(degree);
+        doctor.setDescription(description);
+        doctor.setProfession(profession);
+        doctor.setAddress(address);
+        doctor.setExperience(Double.valueOf(experience));
+        doctor.setDateOfBirth(DateUtils.getDate(dateofbirth, DATE_FORMAT));
+        doctor.setSex(sex.charAt(0));
+        System.out.println("Doctor:" + doctor.toString());
         //DoctorDao dao = new DoctorDao();
         AdminResponse admResponse = doctorService.createDoctor(doctor);
         System.out.println("Doctor create done. admResponse:"+admResponse.toString());
 
         return admResponse.toString();
     }
+    
+    @PUT
+    @Path("update")
+    @Produces(
+            {
+                MediaType.TEXT_XML,MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON
+            })
+    public AdminResponse updateDoctor(Doctor doctor)
+    {
+        AdminResponse response = doctorService.updateDoctor(doctor);
+        System.out.println("...update doctor:"+response.toString());
+        return response;
+    }
+    
+    @DELETE
+    @Path("delete")
+    @Produces(
+            {
+                MediaType.TEXT_XML,MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON
+            })
+    public AdminResponse deleteDoctor(Doctor doctor)
+    {
+        AdminResponse response = doctorService.deleteDoctor(doctor);
+        System.out.println("...delete doctor:"+response.toString());
+        return response;
+    }
+    
 
     @GET
     @Path("text")

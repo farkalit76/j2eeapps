@@ -80,4 +80,9 @@ public class AdminResponse
         this.message = message;
     }
 
+    @Override
+    public String toString()
+    {
+        return "AdminResponse{" + "result=" + result + ", resiltCode=" + resiltCode + ", message=" + message + '}';
+    }
 }

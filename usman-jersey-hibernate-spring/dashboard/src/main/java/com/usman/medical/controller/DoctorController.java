@@ -44,9 +44,8 @@ public class DoctorController
     {
         LOG.info("Doctor display ");
         ModelAndView model = new ModelAndView("doctor_list");
-        //DoctorDao dao = new DoctorDao();
         //List<Doctor> doctors = doctorService.listDoctor();
-        List<Doctor> doctors = DoctorJerseyClient.getGenericType();
+        List<Doctor> doctors = DoctorJerseyClient.getDoctorList();
         System.out.println("doctors:"+doctors.size());
         model.addObject("doctors", doctors);
       
@@ -73,8 +72,9 @@ public class DoctorController
             LOG.info("Doctor:" + doctor.toString());
             doctor.setDateOfBirth(DateUtils.getDate(doctor.getDob(), DATE_FORMAT));
             doctor.setModuleId(IDGenerator.getRandomNum());
-            //DoctorDao dao = new DoctorDao();
-            AdminResponse admResponse = doctorService.createDoctor(doctor);
+            //AdminResponse admResponse = doctorService.createDoctor(doctor);
+            DoctorJerseyClient.createDoctor(doctor);
+            System.out.println("Doctor created by REST...");
             LOG.info("Doctor create done. ");
             List<Doctor> doctors = doctorService.listDoctor();
             model.addAttribute("doctors", doctors);
@@ -93,9 +93,8 @@ public class DoctorController
     {
         LOG.info("Doctor edit ");
         int docId = Integer.parseInt(request.getParameter("docId"));
-
-        //DoctorDao dao = new DoctorDao();
-        Doctor doctor = doctorService.findDoctorById(docId);
+        //Doctor doctor = doctorService.findDoctorById(docId);
+        Doctor doctor = DoctorJerseyClient.getDoctorById(String.valueOf(docId));
         doctor.setDob(DateUtils.getDateToString("yyyy-MM-dd", doctor.getDateOfBirth()));
         model.addAttribute("doctor", doctor);
         model.addAttribute("action", "EDIT");
@@ -110,9 +109,9 @@ public class DoctorController
     public String editDoctor(@ModelAttribute("doctor") Doctor doctor, BindingResult result,Model model)
     {
         LOG.info("Doctor update ");
-        //DoctorDao dao = new DoctorDao();
         doctor.setDateOfBirth(DateUtils.getDate(doctor.getDob(), DATE_FORMAT));
-        AdminResponse admResponse = doctorService.updateDoctor(doctor);
+        //AdminResponse admResponse = doctorService.updateDoctor(doctor);
+        DoctorJerseyClient.updateDoctor(doctor);
         LOG.info("Doctor update completged. ");
         List<Doctor> doctors =  doctorService.listDoctor();
         model.addAttribute("doctors", doctors);
@@ -128,7 +127,6 @@ public class DoctorController
         int docId = Integer.parseInt(request.getParameter("docId"));
         Doctor doctor = new Doctor();
         doctor.setModuleId(docId);
-        //DoctorDao dao = new DoctorDao();
         doctorService.deleteDoctor(doctor);
         List<Doctor> doctors = doctorService.listDoctor();
         model.addAttribute("doctors", doctors);
