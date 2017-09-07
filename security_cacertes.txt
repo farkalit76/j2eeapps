@@ -1,7 +1,7 @@
 1. Open URL with IE Browser 
 2. Click the closed LOCK (security report) at the URL location
 3. It will popup a window, click the view certificates link.
-4. It will popup the certificates window. Goto Details tab, click <Copy to File> button and save it to the desired location as "mycerts.cer"
+4. It will popup the certificates window. Goto Details tab, click <Copy to File> button and then NEXT and NEXT save it to the desired location as "mycerts.cer"
 5. Goto the JAVA Security folder(C:\Program Files\Java\jdk1.8.0_71\jre\lib\security). Paste your  "mycerts.cer" here.
 6. Open the cmd prompt with admin right. Change the location to (C:\Program Files\Java\jdk1.8.0_71\jre\lib\security)
 7. C:\Program Files\Java\jdk1.8.0_71\jre\lib\security>keytool -import -trustcacerts -alias ACIPayments -file aci.cer -keystore cacerts
