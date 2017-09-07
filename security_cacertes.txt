@@ -1,0 +1,46 @@
+1. Open URL with IE Browser 
+2. Click the closed LOCK (security report) at the URL location
+3. It will popup a window, click the view certificates link.
+4. It will popup the certificates window. Goto Details tab, click <Copy to File> button and save it to the desired location as "mycerts.cer"
+5. Goto the JAVA Security folder(C:\Program Files\Java\jdk1.8.0_71\jre\lib\security). Paste your  "mycerts.cer" here.
+6. Open the cmd prompt with admin right. Change the location to (C:\Program Files\Java\jdk1.8.0_71\jre\lib\security)
+7. C:\Program Files\Java\jdk1.8.0_71\jre\lib\security>keytool -import -trustcacerts -alias ACIPayments -file aci.cer -keystore cacerts
+Enter keystore password: <changeit>
+Owner: CN=Network Solutions Certificate Authority, O=Network Solutions L.L.C., C=US
+Issuer: CN=Network Solutions Certificate Authority, O=Network Solutions L.L.C., C=US
+Serial number: 1ca02dc1523b6a6d8b5c1f954aedac30
+Valid from: Sat Jan 01 05:30:00 IST 2011 until: Wed Jan 01 05:29:59 IST 2031
+Certificate fingerprints:
+         MD5:  BD:A4:1D:36:DE:C2:7A:8A:04:37:CB:F2:00:A6:65:54
+         SHA1: 71:89:9A:67:BF:33:AF:31:BE:FD:C0:71:F8:F7:33:B1:83:85:63:32
+         SHA256: 00:16:86:CD:18:1F:83:A1:B1:21:7D:30:5B:36:5C:41:E3:47:0A:78:A1:D3:7B:13:4A:98:CD:54:7B:92:DA:B3
+         Signature algorithm name: SHA1withRSA
+         Version: 3
+
+Extensions:
+
+#1: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+#2: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+#3: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 21 30 C9 FB 00 D7 4E 98   DA 87 AA 2A D0 A7 2E B1  !0....N....*....
+0010: 40 31 A7 4C                                        @1.L
+]
+]
+
+Trust this certificate? [no]:  y
+Certificate was added to keystore
+
+C:\Program Files\Java\jdk1.8.0_71\jre\lib\security>
+
